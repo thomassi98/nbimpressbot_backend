@@ -19,7 +19,7 @@ def streamPrompt():
     # TODO: Implement streaming responses
     user_query = request.json.get('prompt')
     instructions = "Provide me with a Hello World"
-    client = OpenAI(api_key=os.getenv('OPEN_AI_KEY'))
+    client = OpenAI(api_key=os.environ.get('OPEN_AI_KEY'))
 
     @stream_with_context
     def generate():
@@ -57,9 +57,9 @@ def streamPrompt():
 @app.route('/prompt', methods=['POST'])
 def prompt():
     user_query = request.json.get('prompt')
-    client = OpenAI(api_key=os.getenv('OPEN_AI_KEY'))
+    client = OpenAI(api_key=os.environ.get('OPEN_AI_KEY'))
     instructions = "You're working as a communications assistant for Norges Bank Investment Management (NBIM). Tasks include writing press releases following NBIM's format. You should use the file as a context for your response, if present. Do your best to answer the users query"
-    client = OpenAI(api_key=os.getenv('OPEN_AI_KEY'))
+    client = OpenAI(api_key=os.environ.get('OPEN_AI_KEY'))
 
 
     @stream_with_context
@@ -112,8 +112,8 @@ def prompt_file():
         print("User query:", user_query)
 
     instructions = "You're working as a communications assistant for Norges Bank Investment Management (NBIM). Tasks include writing press releases following NBIM's format. If a file is present, use it as a context for your response."
-    client = OpenAI(api_key=os.getenv('OPEN_AI_KEY'))
-    assistant_id = os.getenv('ASSISTANT_ID')
+    client = OpenAI(api_key=os.environ.get('OPEN_AI_KEY'))
+    assistant_id = os.environ.get('ASSISTANT_ID')
 
     # Create thread
     thread = client.beta.threads.create()
